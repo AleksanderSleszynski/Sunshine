@@ -40,12 +40,15 @@ public class ForecastFragment extends Fragment {
 
     ArrayAdapter<String> mForecastAdapter;
 
+    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
+
     public ForecastFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(LOG_TAG, "onCreate()");
         //Add this line in order for this fragment to handle menu events.
         setHasOptionsMenu(true);
     }
@@ -100,7 +103,32 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.e(LOG_TAG, "onStart()");
         updateWeather();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(LOG_TAG, "onResume()");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e(LOG_TAG, "onPause()");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e(LOG_TAG, "onStop()");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e(LOG_TAG, "onDestroy()");
     }
 
     private void updateWeather() {
@@ -185,7 +213,7 @@ public class ForecastFragment extends Fragment {
             // now we work exclusively in UTC
             dayTime = new Time();
 
-            String[] resultStrs = new String[numDays];
+            String[] resultStr = new String[numDays];
             for (int i = 0; i < weatherArray.length(); i++) {
                 // For now, using the format "Day, description, hi/low"
                 String day;
@@ -214,9 +242,9 @@ public class ForecastFragment extends Fragment {
                 double low = temperatureObject.getDouble(OWM_MIN);
 
                 highAndLow = formatHighLows(high, low);
-                resultStrs[i] = day + " - " + description + " - " + highAndLow;
+                resultStr[i] = day + " - " + description + " - " + highAndLow;
             }
-            return resultStrs;
+            return resultStr;
 
         }
 
