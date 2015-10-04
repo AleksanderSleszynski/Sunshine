@@ -176,7 +176,7 @@ public class TestDb extends AndroidTestCase {
         // and our testLocationTable can only return void because it's a test.
         long locationRowId = insertLocation();
 
-        assertFalse("Error: Location Not Inserted Corrctly",
+        assertFalse("Error: Location Not Inserted Correctly",
                 locationRowId !=1);
         // First step: Get reference to writable database
         WeatherDbHelper dbHelper = new WeatherDbHelper(mContext);
