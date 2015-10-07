@@ -268,11 +268,15 @@ public class WeatherProvider extends ContentProvider {
         if (null == selection) selection = "1";
         switch (match) {
             case WEATHER: {
-                rowsDeleted = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(WeatherContract.WeatherEntry.TABLE_NAME,
+                        selection,
+                        selectionArgs);
                 break;
             }
             case LOCATION: {
-                rowsDeleted = db.delete(WeatherContract.LocationEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(WeatherContract.LocationEntry.TABLE_NAME,
+                        selection,
+                        selectionArgs);
                 break;
             }
             default:
@@ -286,7 +290,6 @@ public class WeatherProvider extends ContentProvider {
         if (rowsDeleted != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-        db.close();
         // Student: return the actual rows deleted
         return rowsDeleted;
     }
@@ -306,23 +309,34 @@ public class WeatherProvider extends ContentProvider {
         // by the update.
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
-        int count;
+        int rowsUpdated;
 
         switch (match) {
             case WEATHER: {
-                count = db.update(WeatherContract.WeatherEntry.TABLE_NAME, values, selection, selectionArgs);
+                normalizeDate(values);
+                rowsUpdated = db.update(
+                        WeatherContract.WeatherEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs);
                 break;
             }
             case LOCATION: {
-                count = db.update(WeatherContract.LocationEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = db.update(
+                        WeatherContract.LocationEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs);
                 break;
             }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
-        db.close();
-        return count;
+        if(rowsUpdated != 0 ) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsUpdated;
     }
 
     @Override
