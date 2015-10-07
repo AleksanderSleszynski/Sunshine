@@ -39,7 +39,7 @@ public class WeatherProvider extends ContentProvider {
 
     private static final SQLiteQueryBuilder sWeatherByLocationSettingQueryBuilder;
 
-    static{
+    static {
         sWeatherByLocationSettingQueryBuilder = new SQLiteQueryBuilder();
 
         //This is an inner join which looks like
@@ -55,12 +55,12 @@ public class WeatherProvider extends ContentProvider {
 
     //location.location_setting = ?
     private static final String sLocationSettingSelection =
-            WeatherContract.LocationEntry.TABLE_NAME+
+            WeatherContract.LocationEntry.TABLE_NAME +
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? ";
 
     //location.location_setting = ? AND date >= ?
     private static final String sLocationSettingWithStartDateSelection =
-            WeatherContract.LocationEntry.TABLE_NAME+
+            WeatherContract.LocationEntry.TABLE_NAME +
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
                     WeatherContract.WeatherEntry.COLUMN_DATE + " >= ? ";
 
@@ -177,8 +177,7 @@ public class WeatherProvider extends ContentProvider {
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
             // "weather/*/*"
-            case WEATHER_WITH_LOCATION_AND_DATE:
-            {
+            case WEATHER_WITH_LOCATION_AND_DATE: {
                 retCursor = getWeatherByLocationSettingAndDate(uri, projection, sortOrder);
                 break;
             }
@@ -234,7 +233,7 @@ public class WeatherProvider extends ContentProvider {
             case WEATHER: {
                 normalizeDate(values);
                 long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, values);
-                if ( _id > 0 )
+                if (_id > 0)
                     returnUri = WeatherContract.WeatherEntry.buildWeatherUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -243,7 +242,7 @@ public class WeatherProvider extends ContentProvider {
             case LOCATION: {
                 normalizeDate(values);
                 long _id = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, values);
-                if( _id > 0)
+                if (_id > 0)
                     returnUri = WeatherContract.LocationEntry.buildLocationUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -262,17 +261,18 @@ public class WeatherProvider extends ContentProvider {
         // Student: Start by getting a writable database
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
-        int count;
+        int rowsDeleted;
 
         // Student: Use the uriMatcher to match the WEATHER and LOCATION URI's we are going to
         // handle.  If it doesn't match these, throw an UnsupportedOperationException.
+        if (null == selection) selection = "1";
         switch (match) {
             case WEATHER: {
-                count = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             case LOCATION: {
-                count = db.delete(WeatherContract.LocationEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(WeatherContract.LocationEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             default:
@@ -283,10 +283,12 @@ public class WeatherProvider extends ContentProvider {
         // the uri listeners (using the content resolver) if the rowsDeleted != 0 or the selection
         // is null.
         // Oh, and you should notify the listeners here.
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         db.close();
         // Student: return the actual rows deleted
-        return count;
+        return rowsDeleted;
     }
 
     private void normalizeDate(ContentValues values) {
@@ -306,7 +308,7 @@ public class WeatherProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         int count;
 
-        switch(match){
+        switch (match) {
             case WEATHER: {
                 count = db.update(WeatherContract.WeatherEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
