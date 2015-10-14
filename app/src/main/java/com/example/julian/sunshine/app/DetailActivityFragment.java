@@ -113,14 +113,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             return;
         }
         String dateString = Utility.formatDate(data.getLong((COL_WEATHER_DATE)));
-        String weatherdescription = data.getString(COL_WEATHER_DESC);
+        String weatherDescription = data.getString(COL_WEATHER_DESC);
 
         boolean isMetric = Utility.isMetric(getActivity());
 
         String high = Utility.formatTemperature(data.getDouble(COL_WEATHER_MAX_TEMP), isMetric);
         String low = Utility.formatTemperature(data.getDouble(COL_WEATHER_MIN_TEMP), isMetric);
 
-        mForecast = String.format("%s - %s - %s/%s", dateString, weatherdescription, low, high);
+        mForecast = String.format("%s - %s - %s/%s", dateString, weatherDescription, low, high);
         TextView detailTextView = (TextView) getView().findViewById(R.id.detail_text);
         detailTextView.setText(mForecast);
 
