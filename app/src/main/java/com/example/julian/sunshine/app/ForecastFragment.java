@@ -66,8 +66,6 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public ForecastFragment() {
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,12 +128,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    void onLocationChanged(){
         updateWeather();
+        getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
     }
-
 
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
@@ -146,10 +142,11 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String locationSetting = Utility.getPreferredLocation(getActivity());
+
+        String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATE + " ASC";
         Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
                 locationSetting,
                 System.currentTimeMillis());
-        String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATE + " ASC";
 
 
         return new CursorLoader(getActivity(),
