@@ -56,10 +56,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private static final int COL_WEATHER_MAX_TEMP = 3;
     private static final int COL_WEATHER_MIN_TEMP = 4;
     private static final int COL_WEATHER_HUMIDITY = 5;
-    private static final int COL_WEAHER_PRESSURE = 6;
-    private static final int COL_WEAHER_WIND_SPEED = 7;
-    private static final int COL_WEAHER_DEGREES = 8;
-    private static final int COL_WEAHER_CONDITION_ID = 9;
+    private static final int COL_WEATHER_PRESSURE = 6;
+    private static final int COL_WEATHER_WIND_SPEED = 7;
+    private static final int COL_WEATHER_DEGREES = 8;
+    private static final int COL_WEATHER_CONDITION_ID = 9;
 
     private TextView mDateView;
     private TextView mFriendlyDateView;
@@ -148,7 +148,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
 
-            int weatherId = data.getInt(COL_WEAHER_CONDITION_ID);
+            int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
             mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
 
             long date = data.getLong(COL_WEATHER_DATE);
@@ -168,11 +168,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             float humidity = data.getFloat(COL_WEATHER_HUMIDITY);
             mHumidityView.setText(getActivity().getString(R.string.format_humidity, humidity));
 
-            float pressure = data.getFloat(COL_WEAHER_PRESSURE);
+            float pressure = data.getFloat(COL_WEATHER_PRESSURE);
             mPressure.setText(getActivity().getString(R.string.format_pressure, pressure));
 
-            float windSpeeStr = data.getFloat(COL_WEAHER_WIND_SPEED);
-            float windDirStr = data.getFloat(COL_WEAHER_DEGREES);
+            float windSpeeStr = data.getFloat(COL_WEATHER_WIND_SPEED);
+            float windDirStr = data.getFloat(COL_WEATHER_DEGREES);
             mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeeStr, windDirStr));
 
             String weatherDescription = data.getString(COL_WEATHER_DESC);
