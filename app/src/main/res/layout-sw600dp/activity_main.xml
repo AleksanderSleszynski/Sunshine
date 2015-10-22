@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
-    tools:context="com.example.android.sunshine.app.MainActivity">
+    tools:context="com.example.julian.sunshine.app.MainActivity">
 
     <!--
     This layout is a two-pane layout for the Items master/detail flow.
