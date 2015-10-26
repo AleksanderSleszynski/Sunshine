@@ -22,7 +22,7 @@ public class DetailActivity extends AppCompatActivity {
             fragment.setArguments(arguments);
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.weather_detail_container, new DetailActivityFragment())
+                    .add(R.id.weather_detail_container, fragment)
                     .commit();
         }
     }
