@@ -57,6 +57,9 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     static final int COL_COORD_LAT = 7;
     static final int COL_COORD_LONG = 8;
 
+    static final String SELECTED_KEY = "position";
+    private int mPosition;
+    ListView listView;
 
     private ForecastAdapter mForecastAdapter;
 
@@ -95,12 +98,11 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
 
-
         mForecastAdapter = new ForecastAdapter(getActivity(), null, 0);
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        final ListView listView = (ListView) rootView.findViewById(R.id.listView_forecast);
+        listView = (ListView) rootView.findViewById(R.id.listView_forecast);
         listView.setAdapter(mForecastAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -117,16 +119,23 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                                     locationSetting, cursor.getLong(COL_WEATHER_DATE)
                             ));
                 }
+                mPosition = position;
+
+                if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_KEY)) {
+                    mPosition = savedInstanceState.getInt(SELECTED_KEY);
+                }
             }
         });
         return rootView;
     }
 
-//    @Override
-//    public void onSaveInstanceState(Bundle savedInstanceState) {
-//        savedInstanceState.putInt("position", position);
-//        super.onSaveInstanceState(savedInstanceState);
-//    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        if(mPosition != ListView.INVALID_POSITION) {
+            savedInstanceState.putInt(SELECTED_KEY, mPosition);
+        }
+        super.onSaveInstanceState(savedInstanceState);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -179,6 +188,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mForecastAdapter.swapCursor(data);
+        if(mPosition != ListView.INVALID_POSITION) {
+            listView.setSelection(mPosition);
+            listView.smoothScrollToPosition(mPosition);
+        }
     }
 
     @Override
