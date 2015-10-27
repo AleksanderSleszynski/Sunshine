@@ -72,6 +72,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private TextView mWindView;
     private TextView mPressure;
     private TextView mDescriptionView;
+    private Compass mCompass;
 
     private ImageView mIconView;
 
@@ -99,6 +100,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mWindView = (TextView) rootView.findViewById(R.id.detail_wind_textview);
         mPressure = (TextView) rootView.findViewById(R.id.detail_pressure_textview);
         mDescriptionView = (TextView) rootView.findViewById(R.id.detail_description_textview);
+        mCompass = (Compass)rootView.findViewById(R.id.compass);
 
         mIconView = (ImageView) rootView.findViewById(R.id.detail_icon_imageview);
 
@@ -193,6 +195,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             float windSpeeStr = data.getFloat(COL_WEATHER_WIND_SPEED);
             float windDirStr = data.getFloat(COL_WEATHER_DEGREES);
             mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeeStr, windDirStr));
+            mCompass.update(windDirStr);
 
             String weatherDescription = data.getString(COL_WEATHER_DESC);
             mDescriptionView.setText(weatherDescription);
