@@ -59,7 +59,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     static final String SELECTED_KEY = "position";
     private int mPosition;
-    ListView listView;
+    private ListView listView;
+    private boolean mUseTodayLayout;
 
     private ForecastAdapter mForecastAdapter;
 
@@ -124,6 +125,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                 if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_KEY)) {
                     mPosition = savedInstanceState.getInt(SELECTED_KEY);
                 }
+
+                mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
             }
         });
         return rootView;
@@ -197,5 +200,12 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mForecastAdapter.swapCursor(null);
+    }
+
+    public void setUseTodayLayout(boolean useTodayLayout){
+        mUseTodayLayout = useTodayLayout;
+                if(mForecastAdapter != null){
+                    mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+                }
     }
 }
