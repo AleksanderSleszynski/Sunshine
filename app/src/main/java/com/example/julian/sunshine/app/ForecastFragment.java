@@ -134,7 +134,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        if(mPosition != ListView.INVALID_POSITION) {
+        if (mPosition != ListView.INVALID_POSITION) {
             savedInstanceState.putInt(SELECTED_KEY, mPosition);
         }
         super.onSaveInstanceState(savedInstanceState);
@@ -146,7 +146,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         super.onActivityCreated(savedInstanceState);
     }
 
-    void onLocationChanged(){
+    void onLocationChanged() {
         updateWeather();
         getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
     }
@@ -191,7 +191,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mForecastAdapter.swapCursor(data);
-        if(mPosition != ListView.INVALID_POSITION) {
+        if (mPosition != ListView.INVALID_POSITION) {
             listView.setSelection(mPosition);
             listView.smoothScrollToPosition(mPosition);
         }
@@ -202,10 +202,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         mForecastAdapter.swapCursor(null);
     }
 
-    public void setUseTodayLayout(boolean useTodayLayout){
+    public void setUseTodayLayout(boolean useTodayLayout) {
         mUseTodayLayout = useTodayLayout;
-                if(mForecastAdapter != null){
-                    mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
-                }
+        if (mForecastAdapter != null) {
+            mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+        }
     }
 }

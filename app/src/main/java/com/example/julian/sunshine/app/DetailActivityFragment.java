@@ -197,6 +197,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             String weatherDescription = data.getString(COL_WEATHER_DESC);
             mDescriptionView.setText(weatherDescription);
 
+            mIconView.setContentDescription(weatherDescription);
 
             if (mShareActionProvider != null) {
                 mShareActionProvider.setShareIntent(createShareForecastIntent());
