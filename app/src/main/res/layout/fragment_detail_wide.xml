@@ -103,5 +103,11 @@
                 android:textAppearance="?android:textAppearanceLarge"/>
         </LinearLayout>
 
+
+        <com.example.julian.sunshine.app.Compass
+            android:id="@+id/compass"
+            android:layout_width="70dp"
+            android:layout_height="70dp"/>
+
     </LinearLayout>
 </ScrollView>

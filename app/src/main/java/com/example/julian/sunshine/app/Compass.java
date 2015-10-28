@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -42,9 +43,9 @@ public class Compass extends View {
         int radius;
 
         if (width > height) {
-            radius = height / 2;
+            radius = (height-4) / 2;
         } else {
-            radius = width / 2;
+            radius = (width-4) / 2;
         }
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -55,16 +56,26 @@ public class Compass extends View {
         canvas.drawCircle(width / 2, height / 2, radius, paint);
 
         paint.setColor(getResources().getColor(R.color.sunshine_dark_blue));
+
+        int startX = width/2;
+        int startY = height/2;
+
+        float angle = (float) (direction * Math.PI / 180);
+
+        float endX = (float) (startX  + radius * Math.sin(angle));
+        float endY = (float) (startY  - radius * Math.cos(angle));
+
         canvas.drawLine(
-                width / 2,
-                height / 2,
-                (float) (width / 2 + radius * Math.sin(-direction)),
-                (float) (height / 2 - radius * Math.sin(-direction)),
+                startX,
+                startY,
+                endX,
+                endY,
                 paint
         );
     }
         public void update(float dir){
             direction = dir;
             invalidate();
+            Log.e("PENIS", "" + direction);
     }
 }
