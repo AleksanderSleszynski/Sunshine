@@ -64,6 +64,7 @@
             android:fontFamily="sans-serif-condensed"
             android:layout_gravity="center_horizontal"
             android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"/>
     </LinearLayout>
 </LinearLayout>
