@@ -155,21 +155,21 @@ public class Utility {
         // conditions.  Seriously, try it!
         String direction = "Unknown";
         if (degrees >= 337.5 || degrees < 22.5) {
-            direction = "N";
+            direction = "N \u2191";
         } else if (degrees >= 22.5 && degrees < 67.5) {
-            direction = "NE";
+            direction = "NE \u2197";
         } else if (degrees >= 67.5 && degrees < 112.5) {
-            direction = "E";
+            direction = "E \u2192";
         } else if (degrees >= 112.5 && degrees < 157.5) {
-            direction = "SE";
+            direction = "SE \u2198";
         } else if (degrees >= 157.5 && degrees < 202.5) {
-            direction = "S";
+            direction = "S \u2193";
         } else if (degrees >= 202.5 && degrees < 247.5) {
-            direction = "SW";
+            direction = "SW \u2199";
         } else if (degrees >= 247.5 && degrees < 292.5) {
-            direction = "W";
+            direction = "W \u2190";
         } else if (degrees >= 292.5 || degrees < 22.5) {
-            direction = "NW";
+            direction = "NW \u2196";
         }
         return String.format(context.getString(windFormat), windSpeed, direction);
     }
