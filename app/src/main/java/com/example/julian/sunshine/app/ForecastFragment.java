@@ -100,8 +100,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     private void openPreferredLocationInMap() {
-        if( null != mForecastAdapter)
-        {
+        if( null != mForecastAdapter) {
             Cursor c = mForecastAdapter.getCursor();
             if( null != c){
                 c.moveToPosition(0);
@@ -132,6 +131,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         listView = (ListView) rootView.findViewById(R.id.listView_forecast);
+        View emptyView = rootView.findViewById(R.id.listview_forecast_empty);
+        listView.setEmptyView(emptyView);
         listView.setAdapter(mForecastAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
