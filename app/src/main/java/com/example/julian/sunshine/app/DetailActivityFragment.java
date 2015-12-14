@@ -190,9 +190,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             float pressure = data.getFloat(COL_WEATHER_PRESSURE);
             mPressure.setText(getActivity().getString(R.string.format_pressure, pressure));
 
-            float windSpeeStr = data.getFloat(COL_WEATHER_WIND_SPEED);
+            float windSpeedStr = data.getFloat(COL_WEATHER_WIND_SPEED);
             float windDirStr = data.getFloat(COL_WEATHER_DEGREES);
-            mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeeStr, windDirStr));
+            mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeedStr, windDirStr));
 
             String weatherDescription = data.getString(COL_WEATHER_DESC);
             mDescriptionView.setText(weatherDescription);
