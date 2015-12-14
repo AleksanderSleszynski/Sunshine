@@ -85,4 +85,5 @@
 
     <!-- Empty Weather Database-->
     <string name="empty_forecast_list">No weather Information Available</string>
+    <string name="empty_forecast_list_no_network">No weather information available.The network is not available to fetch weather data.</string>
 </resources>

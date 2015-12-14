@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.julian.sunshine.app.data.WeatherContract;
 import com.example.julian.sunshine.app.sync.SunshineSyncAdapter;
@@ -221,6 +222,20 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         if (mPosition != ListView.INVALID_POSITION) {
             listView.setSelection(mPosition);
             listView.smoothScrollToPosition(mPosition);
+        }
+        updateEmptyView();
+    }
+
+    private void updateEmptyView() {
+        if(mForecastAdapter.getCount() == 0){
+            TextView tv = (TextView) getView().findViewById(R.id.listview_forecast_empty);
+            if (null != tv){
+                int message = R.string.empty_forecast_list;
+                if(!Utility.isNetworkAvailable(getActivity())){
+                    message = R.string.empty_forecast_list_no_network;
+                }
+                tv.setText(message);
+            }
         }
     }
 
