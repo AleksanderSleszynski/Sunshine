@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.julian.sunshine.app.data.WeatherContract;
 
 
@@ -168,7 +169,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         if (data != null && data.moveToFirst()) {
 
             int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
-            mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
+            Glide.with(this)
+                    .load(Utility.getArtUrlForWeatherCondition(getActivity(), weatherId))
+                    .error(Utility.getArtResourceForWeatherCondition(weatherId))
+                    .crossFade()
+                    .into(mIconView);
 
             long date = data.getLong(COL_WEATHER_DATE);
             String friendlyDateText = Utility.getDayName(getActivity(), date);
@@ -179,25 +184,38 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             boolean isMetric = Utility.isMetric(getActivity());
 
             double high = data.getDouble(COL_WEATHER_MAX_TEMP);
-            mHighView.setText(Utility.formatTemperature(getActivity(), high));
+            String highString = Utility.formatTemperature(getActivity(), high);
+            mHighView.setText(highString);
+            mHighView.setContentDescription(getString(R.string.a11y_high_temp, highString));
 
             double low = data.getDouble(COL_WEATHER_MIN_TEMP);
-            mLowView.setText(Utility.formatTemperature(getActivity(), low));
+            String lowString = Utility.formatTemperature(getActivity(), low);
+            mLowView.setText(lowString);
+            mLowView.setContentDescription(getString(R.string.a11y_low_temp, lowString));
 
             float humidity = data.getFloat(COL_WEATHER_HUMIDITY);
             mHumidityView.setText(getActivity().getString(R.string.format_humidity, humidity));
+            mHumidityView.setContentDescription(mHumidityView.getText());
 
             float pressure = data.getFloat(COL_WEATHER_PRESSURE);
             mPressure.setText(getActivity().getString(R.string.format_pressure, pressure));
+            mPressure.setContentDescription(mPressure.getText());
 
             float windSpeedStr = data.getFloat(COL_WEATHER_WIND_SPEED);
             float windDirStr = data.getFloat(COL_WEATHER_DEGREES);
             mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeedStr, windDirStr));
+            mWindView.setContentDescription(mWindView.getText());
 
-            String weatherDescription = data.getString(COL_WEATHER_DESC);
+            // Get description from weather condition ID
+            String weatherDescription = Utility.getStringForWeatherCondition(getActivity(), weatherId);
             mDescriptionView.setText(weatherDescription);
+            mDescriptionView.setContentDescription(getString(R.string.a11y_forecast, weatherDescription));
 
-            mIconView.setContentDescription(weatherDescription);
+            // For accessibility, add a content description to the icon field. Because the ImageView
+            // is independently focusable, it's better to have a description of the image. Using
+            // null is appropriate when the image is purely decorative or when the image already
+            // has text describing it in the same UI component.
+            mIconView.setContentDescription(getString(R.string.a11y_forecast_icon, weatherDescription));
 
             if (mShareActionProvider != null) {
                 mShareActionProvider.setShareIntent(createShareForecastIntent());
