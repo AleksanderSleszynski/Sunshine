@@ -3,12 +3,5 @@
     android:id="@+id/weather_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.julian.sunshine.app.DetailActivity"
-    tools:ignore="MergeRootFrame">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-</FrameLayout>
+    tools:context="com.example.android.sunshine.app.DetailActivity"
+    tools:ignore="MergeRootFrame" />
