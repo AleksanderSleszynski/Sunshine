@@ -93,7 +93,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mUri = arguments.getParcelable(DetailActivityFragment.DETAIL_URI);
         }
 
-        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detail_start, container, false);
         mIconView = (ImageView) rootView.findViewById(R.id.detail_icon);
         mDateView = (TextView) rootView.findViewById(R.id.detail_date_textview);
         mDescriptionView = (TextView) rootView.findViewById(R.id.detail_forecast_textview);
@@ -166,6 +166,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
+            getView().setVisibility(View.VISIBLE);
 
             int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
             if (Utility.usingLocalGraphics(getActivity())){
@@ -220,10 +221,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             // null is appropriate when the image is purely decorative or when the image already
             // has text describing it in the same UI component.
             mIconView.setContentDescription(getString(R.string.a11y_forecast_icon, weatherDescription));
-
-            if (mShareActionProvider != null) {
-                mShareActionProvider.setShareIntent(createShareForecastIntent());
-            }
         }
         AppCompatActivity activity = (AppCompatActivity)getActivity();
         Toolbar toolbarView = (Toolbar) getView().findViewById(R.id.toolbar);
