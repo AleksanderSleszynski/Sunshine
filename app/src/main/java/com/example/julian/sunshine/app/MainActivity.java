@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -36,7 +37,9 @@ public class MainActivity extends AppCompatActivity implements ForecastFragment.
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBar ab = getSupportActionBar();
+        if(ab != null)
+            ab.setDisplayShowTitleEnabled(false);
 
         if(findViewById(R.id.weather_detail_container) != null){
             // The detail container view will be present only in the large-screen layouts
