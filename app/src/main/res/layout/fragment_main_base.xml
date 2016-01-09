@@ -10,7 +10,7 @@
         android:id="@+id/listView_forecast"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="null"/>
+        android:divider="@null"/>
     <!--empty list-->
     <TextView
         android:id="@+id/listview_forecast_empty"
