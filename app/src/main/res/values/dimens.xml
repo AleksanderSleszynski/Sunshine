@@ -16,8 +16,9 @@
     <dimen name="forecast_text_size">32dp</dimen>
 
     <!-- This is an odd width, but we're trying to match the font closely to keep things working
+             on devices that don't yet have Roboto -->
+
     <dimen name="forecast_text_width">60dp</dimen>
-         on devices that don't yet have Roboto -->
     <dimen name="forecast_temperature_space">8dp</dimen>
 
     <!-- Extra Padding -->
@@ -36,4 +37,5 @@
     <dimen name="detail_container_bottom_margin">@dimen/detail_view_padding</dimen>
 
     <dimen name="detail_card_elevation">6dp</dimen>
+    <dimen name="landscape_forecast_view_width">360dp</dimen>
 </resources>
