@@ -1,21 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:layout_height="wrap_content"
     app:columnCount="2">
 
-    <android.support.v7.widget.Space
-        android:layout_height="@dimen/detail_view_padding_vertical"
-        app:layout_columnSpan="2"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"/>
-
     <TextView
-        android:id="@+id/detail_date_textview"
+        android:id="@+id/list_item_date_textview"
         android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
         android:layout_marginTop="@dimen/abc_list_item_padding_horizontal_material"
         android:fontFamily="sans-serif"
@@ -25,21 +17,20 @@
         app:layout_columnSpan="2"
         app:layout_columnWeight="1"
         app:layout_gravity="fill_horizontal"
-        tools:text="Today, April 03"/>
+        tools:text="Today, April 03" />
 
     <ImageView
-        android:id="@+id/detail_icon"
+        android:id="@+id/list_item_icon"
         android:layout_width="0dp"
         android:adjustViewBounds="true"
         android:maxHeight="@dimen/today_icon"
         android:maxWidth="@dimen/today_icon"
         app:layout_columnWeight="1"
         app:layout_gravity="fill_horizontal"
-        tools:src="@drawable/art_clouds"
-        android:transitionName="@string/detail_icon_transition_name"/>
+        tools:src="@drawable/art_clouds" />
 
     <TextView
-        android:id="@+id/detail_high_textview"
+        android:id="@+id/list_item_high_textview"
         android:layout_width="0dp"
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
@@ -47,20 +38,20 @@
         android:textSize="72sp"
         app:layout_columnWeight="1"
         app:layout_gravity="fill_horizontal"
-        tools:text="19"/>
+        tools:text="19" />
 
     <TextView
-        android:id="@+id/detail_forecast_textview"
+        android:id="@+id/list_item_forecast_textview"
         android:layout_width="0dp"
         android:fontFamily="sans-serif"
         android:gravity="center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/secondary_text"
         app:layout_columnWeight="1"
-        tools:text="Rainy"/>
+        tools:text="Rainy" />
 
     <TextView
-        android:id="@+id/detail_low_textview"
+        android:id="@+id/list_item_low_textview"
         android:layout_width="0dp"
         android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
         android:fontFamily="sans-serif-light"
@@ -68,12 +59,6 @@
         android:textColor="@color/secondary_text"
         android:textSize="36sp"
         app:layout_columnWeight="1"
-        tools:text="10"/>
-
-    <android.support.v7.widget.Space
-        android:layout_height="@dimen/detail_view_padding_vertical"
-        app:layout_columnSpan="2"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1" />
+        tools:text="10" />
 
 </android.support.v7.widget.GridLayout>

@@ -188,4 +188,6 @@
     <string name="gcm_weather_alert">Heads up: %1$s in %2$s!</string>
     <string name="gcm_default_SenderId" translatable="false">1048760068130</string>
 
+    <string name="detail_icon_transition_name" translatable="false">TN_DetailIcon</string>
+
 </resources>
