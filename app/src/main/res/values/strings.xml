@@ -197,4 +197,7 @@
     <string name="pref_location_latitude" translatable="false">loc-latitude</string>
     <string name="pref_location_longitude" translatable="false">loc-longitude</string>
 
+    <!-- For Google Places API Attributions -->
+    <string name="attribution_text">Powered by Google</string>
+
 </resources>
