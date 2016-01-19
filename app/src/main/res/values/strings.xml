@@ -202,5 +202,8 @@
 
     <!-- Strings related to Widgets -->
     <string name="title_widget_today">Sunshine Today</string>
+    <string name="title_widget_detail">Sunshine Details</string>
+
+    <string name="muzei_description">Today\'s weather</string>
 
 </resources>

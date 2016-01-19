@@ -35,6 +35,7 @@ import com.example.julian.sunshine.app.MainActivity;
 import com.example.julian.sunshine.app.R;
 import com.example.julian.sunshine.app.Utility;
 import com.example.julian.sunshine.app.data.WeatherContract;
+import com.example.julian.sunshine.app.muzei.WeatherMuzeiSource;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -360,6 +361,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                         new String[]{Long.toString(dayTime.setJulianDay(julianStartDay - 1))});
 
                 updateWidgets();
+                updateMuzei();
                 notifyWeather();
             }
 
@@ -519,6 +521,12 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
         Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
+    }
+
+    private void updateMuzei(){
+        Context context = getContext();
+        context.startService(new Intent(ACTION_DATA_UPDATED)
+        .setClass(context, WeatherMuzeiSource.class));
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
