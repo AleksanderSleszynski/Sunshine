@@ -2,7 +2,7 @@
 Developing Android Apps: Fundamentals
 
 Sunshine is the companion Android app for the Udacity course Developing Android Apps: Android Fundamentals.
-In this app I used openweathermap API to provide current weather data. 
+In this app I used [OpenWeatherMap](http://openweathermap.org) [API](http://openweathermap.org/api) to provide current weather data. 
 
 ## Libraries
 * [Glide](https://github.com/bumptech/glide)
